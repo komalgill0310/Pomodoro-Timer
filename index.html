@@ -8,20 +8,31 @@
 <body>
   <h1>Pomodoro Timer</h1>
   <form>
-    <input type="radio" id="work" name="pomodoro" value="Work">
+    <input type="radio" id="work" name="pomodoro" value="Work" checked>
     <label for="work">Work</label>
     <input type="radio" id="rest" name="pomodoro" value="Rest">
     <label for="rest">Rest</label>
   </form>
-  <br>
-  <p id="breakTime">
-    Rest Timer
-    <span id="restTime">05:00</span>
+   <br>
+ 
+   <p id='work-min'>  
+     Get Back to Work!  
+     <span id='work-time'>10:00</span>
+   </p>
+
+   <p id='break'> 
+    Break Time 
+    <span id="rest-time">02:00</span>
   </p>
 
   <button id="start">Start</button>
-  <button id="reset">Reset</button>
+  <button id="reset">Reset</button> 
 
   <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+  
