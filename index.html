@@ -1,10 +1,12 @@
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pomodoro Timer</title>
 </head>
+
 <body>
   <h1>Pomodoro Timer</h1>
   <form>
@@ -13,26 +15,24 @@
     <input type="radio" id="rest" name="pomodoro" value="Rest">
     <label for="rest">Rest</label>
   </form>
-   <br>
- 
-   <p id='work-min'>  
-     Get Back to Work!  
-     <span id='work-time'>10:00</span>
-   </p>
+  <br>
+  <div id='time'>
+    <p id='work-min'>
+      Get Back to Work!
+      <span id='work-time'>10:00</span>
+    </p>
 
-   <p id='break'> 
-    Break Time 
-    <span id="rest-time">02:00</span>
-  </p>
+    <p hidden id='break'>
+      Break Time
+      <span id="rest-time">02:00</span>
+    </p>
+  </div>
+
 
   <button id="start">Start</button>
-  <button id="reset">Reset</button> 
+  <button id="reset">Reset</button>
 
   <script src="script.js"></script>
 </body>
+
 </html>
-
-
-
-
-  
