@@ -1,19 +1,72 @@
-let second = 60;
+let second = 60;//the below function works as expected only when the second variable is defined globally. 
+let minute = 25;
 
-function secondTimer() {
-  // let second = 60;
-  let sec = document.getElementById('second');
+function secondCountDown() {
+  // if the variable is defined local then why does it only showing the value for 59 and keep calling the interval at that time?
+  //why not decrement the value, when the second variable is defined Locally?
+  // let second = 60; 
   if (second > 10 && second <= 60) {
     second--;
-    sec.innerHTML = `${second}`;
-    console.log(sec.innerHTML);
+    console.log(second);
+  }
+  else if (second > 0 && second <= 10) {
+    second--;
+    console.log('0' + second);
+  }
+  else {
+    second = 60;
+  }
+  return second;
+}
+
+
+
+//How can we make the secondCountDown Interval in a way which only runs when checking the minute function's condition?
+
+//the below line runs, no matter what which I think the code states
+// let secondTime = setInterval(secondCountDown, 1000);
+let workTime = document.getElementById('work');
+let seconds = document.getElementById('second');
+
+function workCountDown() {
+  // let workTime = document.getElementById('work');
+  // let minute = 25;
+  let secondTime = secondCountDown();
+  if (second === 0) {
+    minute--;
+    
+    console.log(workTime.innerHTML);
+  }
+  else if (minute > 0 && minute < 10) {
+    workTime.innerHTML = `0${minute}:${secondTime}`;
+  }
+  else {
+    workTime.innerHTML = `${minute}:${secondTime}`;
   }
 }
 
-document.getElementById('start').addEventListener('click', (e) => {
-  e.preventDefault();
-  setInterval(secondTimer, 1000);
-});
+workTime.innerHTML = `${minute}:`;
+seconds.innerHTML = `${second}`;
+
+setInterval(workCountDown, 1000);
+
+
+// let second = 60;
+
+// function secondTimer() {
+//   // let second = 60;
+//   let sec = document.getElementById('second');
+//   if (second > 10 && second <= 60) {
+//     second--;
+//     sec.innerHTML = `${second}`;
+//     console.log(sec.innerHTML);
+//   }
+// }
+
+// document.getElementById('start').addEventListener('click', (e) => {
+//   e.preventDefault();
+//   setInterval(secondTimer, 1000);
+// });
 
 
 
