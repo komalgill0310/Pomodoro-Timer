@@ -1,10 +1,11 @@
-let second = 60;//the below function works as expected only when the second variable is defined globally. 
-let minute = 25;
+let second = 60;
+let minute =10;
+
+let workTime = document.getElementById('work-time');
+
+setInterval(displayWorkTime, 1000);
 
 function secondCountDown() {
-  // if the variable is defined local then why does it only showing the value for 59 and keep calling the interval at that time?
-  //why not decrement the value, when the second variable is defined Locally?
-  // let second = 60; 
   if (second > 10 && second <= 60) {
     second--;
     console.log(second);
@@ -12,43 +13,59 @@ function secondCountDown() {
   else if (second > 0 && second <= 10) {
     second--;
     console.log('0' + second);
+     return `0${second}`;
   }
   else {
-    second = 60;
+    second = 59;
   }
   return second;
 }
 
-
-
-//How can we make the secondCountDown Interval in a way which only runs when checking the minute function's condition?
-
-//the below line runs, no matter what which I think the code states
-// let secondTime = setInterval(secondCountDown, 1000);
-let workTime = document.getElementById('work');
-let seconds = document.getElementById('second');
-
 function workCountDown() {
-  // let workTime = document.getElementById('work');
-  // let minute = 25;
-  let secondTime = secondCountDown();
-  if (second === 0) {
+    if(second === 0){
     minute--;
-    
-    console.log(workTime.innerHTML);
+    console.log(minute);
+    if ((minute > 0 && minute < 10)) {
+      return `0${minute}`;
+   }
   }
-  else if (minute > 0 && minute < 10) {
-    workTime.innerHTML = `0${minute}:${secondTime}`;
+  else if ((minute > 0 && minute < 10)) {
+     return `0${minute}`;
   }
   else {
-    workTime.innerHTML = `${minute}:${secondTime}`;
+     `${minute}`;
   }
+  return minute;
 }
 
-workTime.innerHTML = `${minute}:`;
-seconds.innerHTML = `${second}`;
+function displayWorkTime() {
+  let workMinute = workCountDown();
+  let secondTime = secondCountDown();
+  workTime.innerHTML = `${workMinute}:${secondTime}`;
+  return workTime;
+}
 
-setInterval(workCountDown, 1000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // let second = 60;
@@ -58,7 +75,7 @@ setInterval(workCountDown, 1000);
 //   let sec = document.getElementById('second');
 //   if (second > 10 && second <= 60) {
 //     second--;
-//     sec.innerHTML = `${second}`;
+// sec.innerHTML = `${second}`;
 //     console.log(sec.innerHTML);
 //   }
 // }
