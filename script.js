@@ -1,21 +1,62 @@
 let second = 60;
-let minute = 01;
-let restMinute = 05;
+let minute = 25;
+let restMinute = 5;
 
 let workTime = document.getElementById('work-time');
+let restTime = document.getElementById('rest-time');
 
-setInterval(displayWorkTime, 1000);
+const radioButtons = document.querySelectorAll('form');
+
+document.getElementById("start").addEventListener('click', (e) => {
+  e.preventDefault();
+  setInterval(displayWorkTime, 1000);
+});
+
+// radioButtons.forEach(function (radioButton) {
+//   document.getElementById('rest-time').style.display = 'none';
+//   radioButton.addEventListener('click', () => {
+//     if (!workTime.checked) {
+//       document.getElementById('work-time').style.display = 'none';
+//       document.getElementById('rest-time').style.display = 'block';
+//       console.log('work');
+//     }
+//     else {
+//       document.getElementById('rest-time').style.display = 'none';
+//       document.getElementById('work-time').style.display = 'block';
+//       console.log('rest');
+//     }
+//   });
+// });
+
+function displayWorkTime() {
+  let workMinute = workCountDown();
+  let secondTime = secondCountDown();
+  workTime.innerHTML = `${workMinute}:${secondTime}`;
+  console.log(workTime.innerHTML);
+  return workTime;
+}
+
+function displayRestTime() {
+  let restMinuteCount = restMinuteCountDown();
+  let secondTime = secondCountDown();
+  restTime.innerHTML = `${restMinuteCount}:${secondTime}`;
+  console.log(restTime.innerHTML);
+  return restTime;
+}
 
 function secondCountDown() {
-   if (second > 10 && second <= 60) {
+  if (second > 10 && second <= 60) {
     second--;
     return second;
   }
   else if ((second > 0 && second <= 10)) {
-    second--;     
-    return `0${second}`;  
+    second--;
+    return `0${second}`;
   }
-  else{
+  else if (second === 0 && minute === 0) {
+    return;
+  }
+  else {
     return `00`;
   }
 }
@@ -37,16 +78,19 @@ function workCountDown() {
   return minute;
 }
 
-function displayWorkTime() {
-  let workMinute = workCountDown();
-  let secondTime = secondCountDown();
-  workTime.innerHTML = `${workMinute}:${secondTime}`;
-  return workTime;
+function restMinuteCountDown() {
+  if (second === 0 && restMinute > 0) {
+    restMinute--;
+    second = 60;
+    `${restMinute}`;
+  }
+  else {
+    `${restMinute}`;
+  }
+  return '0' + restMinute;
 }
 
-// function restMinuteCountDown(){
-//   if(second === 0 && minut)
-// }
+
 
 
 
