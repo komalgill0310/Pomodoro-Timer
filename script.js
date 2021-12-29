@@ -1,39 +1,38 @@
 let second = 60;
-let minute =10;
+let minute = 01;
+let restMinute = 05;
 
 let workTime = document.getElementById('work-time');
 
 setInterval(displayWorkTime, 1000);
 
 function secondCountDown() {
-  if (second > 10 && second <= 60) {
+   if (second > 10 && second <= 60) {
     second--;
-    console.log(second);
+    return second;
   }
-  else if (second > 0 && second <= 10) {
-    second--;
-    console.log('0' + second);
-     return `0${second}`;
+  else if ((second > 0 && second <= 10)) {
+    second--;     
+    return `0${second}`;  
   }
-  else {
-    second = 59;
+  else{
+    return `00`;
   }
-  return second;
 }
 
 function workCountDown() {
-    if(second === 0){
+  if (second === 0 && minute > 0) {
     minute--;
-    console.log(minute);
-    if ((minute > 0 && minute < 10)) {
+    second = 60;
+    if ((minute >= 0 && minute < 10)) {
       return `0${minute}`;
-   }
+    }
   }
-  else if ((minute > 0 && minute < 10)) {
-     return `0${minute}`;
+  else if ((minute >= 0 && minute < 10)) {
+    return `0${minute}`;
   }
   else {
-     `${minute}`;
+    `${minute}`;
   }
   return minute;
 }
@@ -45,6 +44,9 @@ function displayWorkTime() {
   return workTime;
 }
 
+// function restMinuteCountDown(){
+//   if(second === 0 && minut)
+// }
 
 
 
