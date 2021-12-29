@@ -5,34 +5,16 @@ let restMinute = 5;
 let workTime = document.getElementById('work-time');
 let restTime = document.getElementById('rest-time');
 
-const radioButtons = document.querySelectorAll('form');
-
 document.getElementById("start").addEventListener('click', (e) => {
   e.preventDefault();
   setInterval(displayWorkTime, 1000);
 });
 
-// radioButtons.forEach(function (radioButton) {
-//   document.getElementById('rest-time').style.display = 'none';
-//   radioButton.addEventListener('click', () => {
-//     if (!workTime.checked) {
-//       document.getElementById('work-time').style.display = 'none';
-//       document.getElementById('rest-time').style.display = 'block';
-//       console.log('work');
-//     }
-//     else {
-//       document.getElementById('rest-time').style.display = 'none';
-//       document.getElementById('work-time').style.display = 'block';
-//       console.log('rest');
-//     }
-//   });
-// });
-
 function displayWorkTime() {
   let workMinute = workCountDown();
   let secondTime = secondCountDown();
   workTime.innerHTML = `${workMinute}:${secondTime}`;
-  console.log(workTime.innerHTML);
+  console.log(workTime.innerHTML);//running after the condition fails
   return workTime;
 }
 
@@ -40,7 +22,7 @@ function displayRestTime() {
   let restMinuteCount = restMinuteCountDown();
   let secondTime = secondCountDown();
   restTime.innerHTML = `${restMinuteCount}:${secondTime}`;
-  console.log(restTime.innerHTML);
+  console.log(restTime.innerHTML);//running after the condition fails
   return restTime;
 }
 
