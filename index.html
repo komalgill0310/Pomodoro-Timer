@@ -5,26 +5,37 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>
   <h1>Pomodoro Timer</h1>
-  <form>
+  <form class="radio-button">
     <input type="radio" id="work" name="pomodoro" value="Work" checked>
-    <label for="work">Work</label>
+    <label for="work" id="work-label">Work</label>
     <input type="radio" id="rest" name="pomodoro" value="Rest">
     <label for="rest">Rest</label>
   </form>
-  <br>
+
   <div id='work-time'>
+    Press Start to Get back to Work!
+    <br>
+    <br>
     25:00
   </div>
+
   <div id='rest-time'>
+    Press Start to Begin your Break!
+    <br>
+    <br>
     05:00
   </div>
+  <br>
 
-  <button id="start">Start</button>
-  <button id="reset">Reset</button>
+  <div class="start-reset-button">
+    <button id="start">Start</button>
+    <button id="reset">Reset</button>
+  </div>
 
   <script src="script.js"></script>
 </body>

@@ -2,27 +2,42 @@ let second = 60;
 let minute = 25;
 let restMinute = 5;
 
+// let interval;
+
 let workTime = document.getElementById('work-time');
 let restTime = document.getElementById('rest-time');
 
+const radioButtons = document.querySelectorAll('form');
+let start = false;//button is not clicked
+
 document.getElementById("start").addEventListener('click', (e) => {
   e.preventDefault();
-  setInterval(displayWorkTime, 1000);
+  changeTextOfStartButton();
+  disableRestHtml();
+  runTimer();
+  // console.log(setInterval(sec,1000));
 });
+
+document.getElementById("reset").addEventListener('click', (e) => {
+  e.preventDefault();
+  resetTimer();
+  });
 
 function displayWorkTime() {
   let workMinute = workCountDown();
   let secondTime = secondCountDown();
-  workTime.innerHTML = `${workMinute}:${secondTime}`;
-  console.log(workTime.innerHTML);//running after the condition fails
+  // let secondTimer = sec(); when have a closure function 
+  // workTime.textContent = `${workMinute}:${secondTimer}`;when have a closure function 
+  workTime.textContent = `${workMinute}:${secondTime}`;
+  // console.log(workTime.innerHTML);//running after the condition fails
   return workTime;
 }
 
 function displayRestTime() {
   let restMinuteCount = restMinuteCountDown();
   let secondTime = secondCountDown();
-  restTime.innerHTML = `${restMinuteCount}:${secondTime}`;
-  console.log(restTime.innerHTML);//running after the condition fails
+  restTime.textContent = `${restMinuteCount}:${secondTime}`;
+  // console.log(restTime.innerHTML);//running after the condition fails
   return restTime;
 }
 
@@ -72,6 +87,71 @@ function restMinuteCountDown() {
   return '0' + restMinute;
 }
 
+//display timer text under desired section
+radioButtons.forEach(function (radioButton) {
+  restTime.style.display = 'none';
+  radioButton.addEventListener('click', () => {
+    if (document.getElementById('work').checked) {
+      workTime.style.display = 'block';
+      restTime.style.display = 'none';
+    }
+    else {
+      restTime.style.display = 'block';
+      workTime.style.display = 'none';
+    }
+  });
+});
+
+//disable rest of the elements when Clicked Start Button
+function disableRestHtml() {
+  if (start) {
+    document.getElementById('rest').disabled = true;
+    document.getElementById('work').disabled = true;
+    document.getElementById('reset').disabled = true;
+  }
+  else {
+    document.getElementById('rest').disabled = false;
+    document.getElementById('work').disabled = false;
+    document.getElementById('reset').disabled = false;
+  }
+}
+
+function changeTextOfStartButton() {
+  if (!start) {
+    document.getElementById('start').textContent = 'Stop';
+    console.log('changed');
+    start = true;
+  }
+  else {
+    document.getElementById('start').textContent = 'Start';
+    console.log('Start again');    
+    start = false;
+  }
+}
+let workInterval;
+let restInterval;
+
+function runTimer() {
+   workInterval = setInterval(displayWorkTime, 1000);
+   restInterval = setInterval(displayRestTime,1000);
+  return document.getElementById('work').checked ? workInterval : restInterval;
+}
+
+// function stopTimer(){
+//   document.getElementById('work').checked? clearInterval(setInterval(displayWorkTime, 1000)):clearInterval(setInterval(displayRestTime, 1000));
+// }
+
+function resetTimer(){
+  second = 0;
+  if(document.getElementById('work').checked){
+    minute = 25;
+    workTime.textContent = `${minute}:0${second}`;
+  }
+  else{
+    restMinute = 5;
+    restTime.textContent = `${restMinute}:0${second}`;
+  }
+}
 
 
 
@@ -89,6 +169,38 @@ function restMinuteCountDown() {
 
 
 
+
+
+
+//the conditon (if (second === 0 && minute > 0)) only works if I declare the second variable global.
+// let second;
+
+//closure function: But how can I use the second variable inside of another function
+// let sec = (function () {
+//    second = 60;
+//   return function () {
+//     if (second > 10 && second <= 60) {
+//       second--;
+//       console.log(second);
+//       return second;
+//     }
+//     else if ((second > 0 && second <= 10)) {
+//       second--;
+//       console.log('0' + second);
+//       return `0${second}`;
+//     }
+//     // else if( second === 0 && minute > 0){
+//     //   second = 60;
+//     // }
+//     else if (second === 0 && minute === 0) {
+//       return;
+//     }
+//     else {
+//       console.log('00');
+//       return `00`;
+//     }
+//   }
+//   })();
 
 
 
