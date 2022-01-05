@@ -1,8 +1,10 @@
-let second = 60;
+let restSecond = 60;
+let workSecond = 60;
 let minute = 25;
 let restMinute = 5;
 
-// let interval;
+let workInterval;
+let restInterval;
 
 let workTime = document.getElementById('work-time');
 let restTime = document.getElementById('rest-time');
@@ -12,45 +14,80 @@ let start = false;//button is not clicked
 
 document.getElementById("start").addEventListener('click', (e) => {
   e.preventDefault();
+  if (e.target.textContent === 'Start') {
+    document.getElementById('work').checked ? runWorkTimer() : runRestTimer();
+  }
+  else {
+    stopInterval();
+  }
   changeTextOfStartButton();
   disableRestHtml();
-  runTimer();
-  // console.log(setInterval(sec,1000));
 });
 
 document.getElementById("reset").addEventListener('click', (e) => {
   e.preventDefault();
   resetTimer();
-  });
+});
+
+function runWorkTimer() {
+  workInterval = setInterval(displayWorkTime, 1000);
+  return workInterval;
+}
 
 function displayWorkTime() {
   let workMinute = workCountDown();
-  let secondTime = secondCountDown();
-  // let secondTimer = sec(); when have a closure function 
-  // workTime.textContent = `${workMinute}:${secondTimer}`;when have a closure function 
-  workTime.textContent = `${workMinute}:${secondTime}`;
-  // console.log(workTime.innerHTML);//running after the condition fails
+  let workSecondTime = workSecondCountDown();
+  workTime.textContent = `${workMinute}:${workSecondTime}`;
   return workTime;
+}
+
+function runRestTimer() {
+  restInterval = setInterval(displayRestTime, 1000);
+  return restInterval;
 }
 
 function displayRestTime() {
   let restMinuteCount = restMinuteCountDown();
-  let secondTime = secondCountDown();
-  restTime.textContent = `${restMinuteCount}:${secondTime}`;
-  // console.log(restTime.innerHTML);//running after the condition fails
+  let restSecondTime= restSecondCountDown();
+  restTime.textContent = `${restMinuteCount}:${restSecondTime}`;
   return restTime;
 }
 
-function secondCountDown() {
-  if (second > 10 && second <= 60) {
-    second--;
-    return second;
+function stopInterval() {
+  if (document.getElementById('work').checked) {
+    clearInterval(workInterval);
   }
-  else if ((second > 0 && second <= 10)) {
-    second--;
-    return `0${second}`;
+  else {
+    clearInterval(restInterval);
   }
-  else if (second === 0 && minute === 0) {
+}
+
+function resetTimer() {
+  // second = 0;
+  if (document.getElementById('work').checked) {
+    minute = 25;
+    workSecond = 0;
+    workTime.textContent = `${minute}:0${workSecond}`;
+    return workTime;
+  }
+  else {
+    restMinute = 5;
+    restSecond = 0
+    restTime.textContent = `0${restMinute}:0${restSecond}`;
+    return restTime;
+  }
+}
+
+function restSecondCountDown() {
+  if (restSecond > 10 && restSecond <= 60) {
+    restSecond--;
+    return restSecond;
+  }
+  else if ((restSecond > 0 && restSecond <= 10)) {
+    restSecond--;
+    return `0${restSecond}`;
+  }
+  else if (restSecond === 0 && minute === 0) {
     return;
   }
   else {
@@ -58,10 +95,44 @@ function secondCountDown() {
   }
 }
 
+function workSecondCountDown() {
+  if (workSecond > 10 && workSecond <= 60) {
+    workSecond--;
+    return workSecond;
+  }
+  else if (workSecond > 0 && workSecond <= 10) {
+    workSecond--;
+    return `0${workSecond}`;
+  }
+  else if (workSecond === 0 && minute === 0) {
+    return;
+  }
+  else {
+    return `00`;
+  }
+}
+
+// function secondCountDown() {
+//   if (second > 10 && second <= 60) {
+//     second--;
+//     return second;
+//   }
+//   else if ((second > 0 && second <= 10)) {
+//     second--;
+//     return `0${second}`;
+//   }
+//   else if (second === 0 && minute === 0) {
+//     return;
+//   }
+//   else {
+//     return `00`;
+//   }
+// }
+
 function workCountDown() {
-  if (second === 0 && minute > 0) {
+  if (workSecond === 0 && minute > 0) {
     minute--;
-    second = 60;
+    workSecond = 60;
     if ((minute >= 0 && minute < 10)) {
       return `0${minute}`;
     }
@@ -76,9 +147,9 @@ function workCountDown() {
 }
 
 function restMinuteCountDown() {
-  if (second === 0 && restMinute > 0) {
+  if (restSecond === 0 && restMinute > 0) {
     restMinute--;
-    second = 60;
+    restSecond = 60;
     `${restMinute}`;
   }
   else {
@@ -124,34 +195,79 @@ function changeTextOfStartButton() {
   }
   else {
     document.getElementById('start').textContent = 'Start';
-    console.log('Start again');    
+    console.log('Start again');
     start = false;
   }
 }
-let workInterval;
-let restInterval;
 
-function runTimer() {
-   workInterval = setInterval(displayWorkTime, 1000);
-   restInterval = setInterval(displayRestTime,1000);
-  return document.getElementById('work').checked ? workInterval : restInterval;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function runSecondCountDown() {
+//   // let secondTime;
+//   if (document.getElementById('work').checked) {
+//     let secondTime = secondCountDown();
+//     return secondTime;
+//   }
+//   else {
+//     let secondTime = secondCountDown();
+//     return secondTime;
+//   }
+// }
+
+// let workInterval;
+// let restInterval;
+
+// function runTimer() {
+//   let interval = {
+//    workInterval: setInterval(displayWorkTime, 1000),
+//    restInterval: setInterval(displayRestTime,1000)
+//   };
+//   // return document.getElementById('work').checked ? interval.workInterval : interval.restInterval;
+//   let intervalId = document.getElementById('work').checked ? interval.workInterval : interval.restInterval;
+//   console.log(intervalId);
+//   return intervalId;
+// }
+
 
 // function stopTimer(){
 //   document.getElementById('work').checked? clearInterval(setInterval(displayWorkTime, 1000)):clearInterval(setInterval(displayRestTime, 1000));
 // }
 
-function resetTimer(){
-  second = 0;
-  if(document.getElementById('work').checked){
-    minute = 25;
-    workTime.textContent = `${minute}:0${second}`;
-  }
-  else{
-    restMinute = 5;
-    restTime.textContent = `${restMinute}:0${second}`;
-  }
-}
+// function resetTimer(){
+//   let intervalRef = runTimer();
+//   console.log(intervalRef);
+//   // second = 0;
+//   if(document.getElementById('work').checked){
+//     minute = 25;
+//     second = 0;
+//     workTime.textContent = `${minute}:0${second}`;
+//   }
+  // else{
+  //   restMinute = 5;
+  //   second = 0;
+  //   restTime.textContent = `${restMinute}:0${second}`;
+  // }
+//   console.log(clearTimeout(intervalRef));
+// //  return clearInterval(intervalRef);
+// return clearTimeout(intervalRef);
+// }
 
 
 
