@@ -6,6 +6,8 @@ let restMinute = 5;
 let workInterval;
 let restInterval;
 
+let beepSound = document.getElementById('audio');
+
 let workTime = document.getElementById('work-time');
 let restTime = document.getElementById('rest-time');
 
@@ -19,6 +21,7 @@ document.getElementById("start").addEventListener('click', (e) => {
   }
   else {
     stopInterval();
+    pauseAudio();
   }
   changeTextOfStartButton();
   disableHtmlOnClickedStartButton();
@@ -105,7 +108,7 @@ function workCountDown() {
   if (workSecond === 0 && workMinute > 0) {
     workMinute--;
     workSecond = 60;
-    if ((minute >= 0 && workMinute < 10)) {
+    if ((workMinute >= 0 && workMinute < 10)) {
       return `0${workMinute}`;
     }
   }
@@ -127,12 +130,11 @@ function workSecondCountDown() {
     workSecond--;
     return `0${workSecond}`;
   }
-  else if (workSecond === 0 && minute === 0) {
-    return;
+  else if (workSecond === 0 && workMinute === 0) {
+    playAudio();
+    workSecond = '00';
   }
-  else {
-    return `00`;
-  }
+  return workSecond;
 }
 
 function restMinuteCountDown() {
@@ -150,18 +152,16 @@ function restMinuteCountDown() {
 function restSecondCountDown() {
   if (restSecond > 10 && restSecond <= 60) {
     restSecond--;
-    return restSecond;
   }
   else if ((restSecond > 0 && restSecond <= 10)) {
     restSecond--;
     return `0${restSecond}`;
   }
-  else if (restSecond === 0 && minute === 0) {
-    return;
+  else if (restSecond === 0 && restMinute === 0) {
+    playAudio();
+    restSecond = '00';
   }
-  else {
-    return `00`;
-  }
+  return restSecond;
 }
 
 radioButtons.forEach(function (radioButton) {
@@ -178,7 +178,15 @@ radioButtons.forEach(function (radioButton) {
   });
 });
 
+function playAudio(){
+  beepSound.play();
+  console.log('Sound is playing.');
+}
 
+function pauseAudio(){
+  beepSound.pause();
+  console.log('Sound is not playing.');
+}
 
 
 
