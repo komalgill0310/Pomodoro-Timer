@@ -105,7 +105,10 @@ function displayRestTime() {
 }
 
 function workCountDown() {
-  if (workSecond === 0 && workMinute > 0) {
+  if (workSecond === 60) {
+    workMinute--;
+  }
+  else if (workSecond === 0 && workMinute > 0) {
     workMinute--;
     workSecond = 60;
     if ((workMinute >= 0 && workMinute < 10)) {
@@ -138,7 +141,10 @@ function workSecondCountDown() {
 }
 
 function restMinuteCountDown() {
-  if (restSecond === 0 && restMinute > 0) {
+  if(restSecond === 60){
+    restMinute--;
+  }
+   else if (restSecond === 0 && restMinute > 0) {
     restMinute--;
     restSecond = 60;
     `${restMinute}`;
@@ -178,14 +184,12 @@ radioButtons.forEach(function (radioButton) {
   });
 });
 
-function playAudio(){
+function playAudio() {
   beepSound.play();
-  console.log('Sound is playing.');
 }
 
-function pauseAudio(){
+function pauseAudio() {
   beepSound.pause();
-  console.log('Sound is not playing.');
 }
 
 
