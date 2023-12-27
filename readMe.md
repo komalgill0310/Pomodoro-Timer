@@ -18,4 +18,4 @@
 * At last, when timer ends it beeps like real alarm clock.
 
 # Author
-<font size=5>Komal - | Software Developer | [Pomodoro Timer](https://komalgill0310.github.io/Pomodoro-Timer/) | [LinkedIn](www.linkedin.com/in/komalpreet-kaur-3b6924177)
+Komal | Software Developer | [Portfolio](https://kaurkomal.com/) | [LinkedIn](https://www.linkedin.com/in/hssa03/)
